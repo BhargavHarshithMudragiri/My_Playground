@@ -35,7 +35,7 @@ pipeline
    {
     steps {
     		echo 'Building Docker Image'
-    		sh 'docker build -t bhargavharshith/my-web-app:v${BUILD_NUMBER} .'
+    		sh 'docker build -t bhargavharshith/web-app:v${BUILD_NUMBER} .'
           }
    }
    stage('Push Docker Image to Dockerhub')
@@ -48,7 +48,7 @@ pipeline
 			sh 'docker login -u bhargavharshith -p ${dockerhub}'
 			}
 	          }
-		  sh 'docker push bhargavharshith/my-web-app:v${BUILD_NUMBER}'
+		  sh 'docker push bhargavharshith/web-app:v${BUILD_NUMBER}'
 	}
           
    }
@@ -66,7 +66,7 @@ pipeline
 		    git config user.email="bhargav@gmail.com"
 		    git config user.name="bhargav"
 		    BUILD_NUMBER = ${BUILD_NUMBER}
-		    sed -i 's/my-web-app:v*/my-web-app:v${BUILD_NUMBER}/g' deployments/deployment.yml
+		    sed -i 's/web-app:v*/web-app:v${BUILD_NUMBER}/g' deployments/deployment.yml
 		    git add .
 		    git commit -m "Saving changes to git local repository with code version ${BUILD_NUMBER}"
 		    git push "https://${githubtoken}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
