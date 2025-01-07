@@ -1,0 +1,81 @@
+pipeline 
+{
+ agent any 
+ tools 
+ {
+  maven 'maven3'
+ }
+
+ stages
+ {
+   stage('Code checkout')
+   {
+     steps {
+     		echo 'Cloning Project'
+		git branch:'main', url="https://github.com/BhargavHarshithMudragiri/My_Playground.git"
+           }
+   }
+   stage('SonarQube Code Scan')
+   {
+    steps {
+    		echo 'Scaning code in SonarQube'
+    		sh ''' mvn sonar:sonar \\
+			-DSonar.host.url="<<SonarQube_URL" \\
+			-DSonar.login="<<SonarToken>>" '''
+          }
+   }
+   stage('Maven Artifact Build')
+   {
+    steps {
+    		echo 'Building Artifact'
+    		sh 'mvn clean package'
+          }
+   }
+   stage('Build Docker Image')
+   {
+    steps {
+    		echo 'Building Docker Image'
+    		sh 'docker build -t bhargavharshith/my-web-app:v${BUILD_NUMBER} .'
+          }
+   }
+   stage('Push Docker Image to Dockerhub')
+   {
+    steps {
+    	   echo 'Pushing Docker Image to Dockerhub Repo"
+    	   script {
+	   		withCredentials([string(credentialsID: 'dockerhub', variable: 'dockerhub'])
+			{
+			sh 'docker login -u bhargavharshith -p ${dockerhub}'
+			}
+	          }
+		  sh 'docker push bhargavharshith/my-web-app:v${BUILD_NUMBER}'
+	}
+          
+   }
+   stage('Updating Deployment Files')
+   {
+	environment {
+			GIT_REPO_NAME=My_Playground
+			GIT_USER_NAME=BhargavHarshithMudragiri
+	            }
+	steps {
+		echo 'Updating Deployment Files in Github'
+		withCredentials(string[credentialID: 'githubtoken' , varaible: 'githubtoken'])
+		{
+		  sh '''
+		    git config user.email="bhargav@gmail.com"
+		    git config user.name="bhargav"
+		    BUILD_NUMBER = ${BUILD_NUMBER}
+		    sed -i 's/my-web-app:v*/my-web-app:v${BUILD_NUMBER}/g' deployments/deployment.yml
+		    git add .
+		    git commit -m "Saving changes to git local repository with code version ${BUILD_NUMBER}"
+		    git push "https://${githubtoken}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+                   '''
+		    
+		}
+	      }
+   }
+
+ }
+
+}
