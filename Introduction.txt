@@ -1,0 +1,267 @@
+Shell Scripting V/S Python
+
+What is shell scripting ?
+
+Shell scripting is not actually programming --> It is more of automation of Shell Tasks / Linux commands / Linux Based Task Automation
+
+---Is a command line Interpreter and scripting language for unix like operating systems
+---Not for Windows. Windows has Powershell
+---Used for running and automating command-line tasks
+---Ideally used for automating system-level tasks, managing files, running system commands and writing small utility scripts
+
+Shell scripting includes 
+--Variables (local,global) 
+--Operators (Arithmatic, Logical, Conditional etc)
+--Conditional Expressions
+--Loops
+--Functions
+--Real Time Usecases
+
+Then Why Python ?
+
+--Python is a programming Language, A High Level, General purpose programming Language
+--Clean, Readable syntax
+--Object Oriented Programming
+--Used for Web Development, Data Analysis, Machine Learning, Automation(Devops), Scientific Computing and more..
+--Our scope is limited to Python Scripting for Devops
+--OOP focuses on the concepts of classes, objects, inheritance, encapsulation, polymorphism, abstraction
+
+
+What is Program ?
+
+Program -->  Multiple Lines of code -- Instructions --> Software --> To CPU -> Processor (which will execute the given instructions)
+	     Collections of code
+	     It manipulates data
+	     To store data, we use variables
+
+In Shell: read (Reads value from user) , echo (Print the value on screen)
+In Python: input (Reads value from user), print (Print the value on screen)
+
+-----------------------------------------------------------------
+Example 1: Shell Script v/s Python
+
+Bash Script:
+------------
+greet() {
+   echo "Hi, $1!"
+}
+
+greet "Bhargav"   --> Calling Greet function by passing Argument 
+
+
+Python Script:
+-------------
+def greet(name):
+  print(f"Hello, {name}!")
+
+greet("Bhargav")  -> Calling greet function by passing parameter
+
+-------------------------------------------------------------------
+Example 2: Add 2 numbers in shell v/s python
+
+Bash Script:
+------------
+
+vi Sum.sh
+
+#!/bin/bash
+echo "Enter the first value"
+read num1
+
+echo "Enter the second value"
+read num2
+
+Sum=$((num1+num2))
+
+echo "Sum of 2 values is: $Sum"
+
+
+Python Script:
+------------ 
+
+num1 = input("Enter the first value: ")
+num2 = input("Enter the second value: ")
+
+sum = num1 + num2
+print(f"The sum of {num1} and {num2} is: {sum}")
+
+
+
+--------------------------------------------------------------------------------
+
+Variable --> Storage Unit
+	     Used to store data 
+
+-----------------------------------------------------------------------------
+
+
+Operators:
+
+Arithmetic: +, -, *, / , %
+Assignment: = , +=, -= , *=
+Comparision: < ,  > ,  <= ,  >= , != , ==
+            -lt, -gt, -le , -ge ,     -eq 
+
+Logical: && , ||
+Identity: is (==), is not (!=)
+Membership: in, not in
+Bitwise: &  | ! ^
+
+----------------------------------------------------------------------------
+
+Functions ?
+
+---Block of code for repeated use
+---Allows to group  a set of commands into a single, reusable unit
+---Breakdown total functionality of script into logical sub-sections
+---Encapsulate and Reuse code
+---We can call functions whenever needed
+---Makes your script more organized, modular and easier to maintain.
+
+
+Syntax:
+
+Shell:
+-----
+
+function_name() {
+	
+	#commands to execute
+
+}
+
+Python:
+------
+
+def function_name(parameter):
+	#commands to execute
+    return value
+
+-----------------------------------------------------------------------
+
+
+Dynamic Typed V/S Static Typed :
+
+
+Dynamic typing means the type of the variable is determined at the runtime of the program and not in advance. You dont need to declare the type of variable when you create it.
+
+Static typing means the type of the variable is known at compile time. You must declare the type of variable before you use it. And this type cannot be changed throughout the program.
+Languages like C, C++, Java, Go are Static Typed Programming Languages.
+
+
+----------------------------------------------------------------------
+
+Python Loops:
+
+For Loop
+While Loop
+
+While Loop: It enables you to execute set of commands as long as the condition is true. Once condition fails, it comes out of loop.
+
+Example in Shell:
+-----------------
+#!/bin/bash
+i=0
+while [ "$i" -le 100 ];
+do
+  echo "$i"
+  i = $((i+1))
+done
+
+Example in Python:
+------------------
+i=0
+while i < 100:
+      print(f"Number is: {i}")
+      i = i + 1
+
+
+(or)
+
+i=100
+while i > 0:
+      print(f"Number is: {i}")
+      i= i - 1
+
+
+For Loop: For loop operates on the list of items. It repeats commands on every item in the list
+
+Syntax:
+
+for item in list:
+    #Block Of Code to execute
+     statement 1
+     statement 2
+    #More statements
+
+Examples:
+
+list = [1,2,3,4]
+for i in list:
+     print(i)
+
+
+for i in range(5):      #Range(n) --> 0 to n-1 values
+      print(i)
+
+for i in range(1,11):   #Range(k,n) --> k to n-1 values
+     print(i)
+
+fruits = ["apple", "banana", "orange"]
+for item in fruits:
+     print(f"Fruit is: {item}")
+
+
+
+
+------------------------------------------------------------------------------------------------
+
+In python, break and continue are control flow statements used inside loops (for & while). They help control the flow of loop execution based on certain conditions.
+
+break: used to exit the loop prematurely.
+continue: used to skip the rest of the current iteration and proceeds to the next iteration of the loop.
+
+Example: 
+
+counter = 1
+while counter < 10:
+     print(counter)
+     counter += 1
+    if counter == 5:
+        break         #Exit the loop when counter value is 5
+    print(f"Exited loop as Current Counter value is: {counter}")
+
+counter = 0
+while i < 10:
+    counter+= 1
+    if counter == 5:
+       continue		#Exits the current iteration of loop and proceeds to next iteration 
+    print(counter)
+
+
+
+-------------------------------------------------------------------------------
+
+Lambda:
+
+Lambda function is a small, anonymous function defined using the keyword lambda.
+
+syntax: lambda arguments: expression
+ 
+       --lambda = keyword used to define anonymous function
+       --arguments = Input parameters to the function
+       --expression = Single expression that the function returns
+
+Example:
+
+def add(a,b):
+    return a+b
+
+result = add(10,20)
+print(f"Addition of numbers: {result}")
+
+
+Replace above function with 2 lines using lambda function
+
+result = lambda a,b:a+b
+print(f"Addition of 10 and 20 is: {result(10,20)}")
