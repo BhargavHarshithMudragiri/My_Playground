@@ -1,0 +1,16 @@
+To Attach a newly created EBS volume to a folder/directory in Linux Machine, use below commands
+
+df -Th  --> This will help you to view the disk filesystem , Type of filesystem and Usage
+
+#Convert the volume to a file system using below command
+
+mkfs -t ext4 /dev/xvdf   --> This will create a file system of type ext4 having volume xvdf
+
+mkdir /Bhargav --> Create a folder named Bhargav under root directory
+
+mount -t ext4 /dev/xvdf /Bhargav   --> Mount the filesystem to a folder called Bhargav to make use of the newly created volume
+
+df -Th  --> You will now be able to see the newly mounted EBS volume
+
+Note: EBS volumes are region specific so you cannot copy them from one region to another region. Only option left is to take backup (Snapshot) of that EBS volume and you can copy that snapshot from one region to another region. From there, you can create a volume from
+      snapshot and attach to your servers in that region.
