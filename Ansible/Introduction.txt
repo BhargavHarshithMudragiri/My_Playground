@@ -26,4 +26,52 @@ Ansible contains three main components:
 2. Inventory - A list of managed nodes that are logically organised. You create a inventory on control node to describe host deployments to ansible.
 3. Managed Node - A remote system or host that ansible controls.
 
+Ansible Adhoc commands:
 
+To Install Git
+
+ansible -i /opt/inventory all -m apt -b -a "name=git state=present"
+
+To Uninstall Git
+
+ansible -i /opt/inventory all -m apt -b -a "name=git state=absent"
+
+To Add User
+
+ansible -i /opt/inventory all -m user -b -a "name=BhargavHarshith state=present"
+
+To Add Apache2 Webserver
+
+ansible -i /opt/inventory all -m apt -b -a "name=apache2 state=present"
+
+To uninstall Apache2 Webserver
+
+ansible -i /opt/inventory all -m apt -b -a "name=apache2 state=absent"
+
+To start Apache2 service
+
+ansible -i /opt/inventory all -m service -b -a "name=apache2 state=started"
+
+To stop Apache2 service
+
+ansible -i /opt/inventory all -m service -b -a "name=apache2 state=stopped"
+
+To Add File
+
+ansible -i /opt/inventory all -m file -b -a "name=File1 touch=present"
+
+To Delete File
+
+ansible -i /opt/inventory all -m file -b -a "name=File1 touch=absent"
+
+To Add Folder
+
+ansible -i /opt/inventory all -m file -b -a "name=Folder1 directory=present"
+
+To Delete Folder
+
+ansible -i /opt/inventory all -m file -b -a "name=Folder2 directory=absent"
+
+To Deploy HTML file into apache2 server
+
+ansible -i /opt/inventory all -m copy -b -a "src=/opt/index.html dest=/var/www/html/index.html"
