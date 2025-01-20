@@ -1,0 +1,41 @@
+- name: Ansible Playbook to Add user, Install Git & Apache2, Apache2 Service Start & Status check, Deploy Files
+  become: yes
+  hosts: all
+
+  tasks:
+  - name: Add User
+    user:
+    - name: bhargavharshith
+      state: present
+      tags: add_user
+
+  - name: Install Git
+    apt:
+    - name: git
+      state: present
+
+  - name: Install Apache2
+    apt:
+    - name: apache2
+      state: present
+
+  - name: Apache2 Service Start
+    service:
+    - name: apache2
+      state: started
+
+  - name: Apache2 Status
+    shell: service apache2 status
+    register: apache2-status-output
+    tags: apache2_status
+
+  - name: Display Apache2 Status
+    debug:
+      var: apache2-status-output
+    tags: apache2_status
+
+  - name: Deploy Source Code
+    copy:
+      src: /opt/sourcecode/index.html
+      dest: /var/www/html/index.html
+    tags: deploy_files

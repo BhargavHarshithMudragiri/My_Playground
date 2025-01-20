@@ -1,0 +1,29 @@
+Ansible is a open source, IT automation software application written in Python.
+It is used to configure systems, deploy software and orchestrate advanced workflows to support application deployment, system updates and more.
+
+Ansible lets you automate any task virtually. Here are some use cases for Ansible
+1. Eliminate Repetetion and simplify workflows
+2. Manage and Maintain System Configuration
+3. Continously Deploy complex software
+4. Perform Zero downtime rolling updates
+
+Ansible uses simple, human readable scripts called Playbooks to automate tasks. 
+You declare the desired state of your local or remote system and ansible ensures that the system remains in that state.
+
+As automation technology, ansible is designed around the following principles:
+
+1. Agentless Architecture: Low Maintenance overhead as it avoids the additional software installation across IT infrastucture.
+2. Simplicity: Ansible Playbooks use straight forward YAML syntax to code that reads like documentation. Ansible is also decentralized, using SSH with OS credentials
+               to access to remote machines.
+3. Scalability & Flexibiliy: Easily and Quickly scales the system that you automate through a modular design that supports a large range of operating systems, network
+                             devices, cloud platforms
+3. Idempotence & Predictability: When the system is in the state that your ansible playbook described, then ansible does not change anything even if the playbook runs
+                                 multiple times.
+
+Ansible contains three main components:
+
+1. Control Node - A System on which Ansible is installed. You can run commands such as ansible and ansible-inventory on a control node.
+2. Inventory - A list of managed nodes that are logically organised. You create a inventory on control node to describe host deployments to ansible.
+3. Managed Node - A remote system or host that ansible controls.
+
+
