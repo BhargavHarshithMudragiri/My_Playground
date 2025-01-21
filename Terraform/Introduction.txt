@@ -1,0 +1,15 @@
+Terraform is open source Infrastructure As Code (IAC) tool used to automate Infrastucture Deployment on cloud platforms.
+It can deploy infrastructure on multiple cloud providers such as AWS, Azure, GCP etc makes it on demand tool in the market. 
+
+Major advantage of terraform is that it can be integrated with any cloud provider to deploy infrastructure and helps its users to avoid learning multiple templates such
+as AWS Cloud Formation Template for AWS, Azure Resource Manager Templates for Azure, Heat Templates for Openstack etc..
+
+It uses Hashicorp Language Templating to create Terraform scripts and has very good official documentation to support its users.
+
+Terraform has below important commands to use.
+1. Terraform Init - Which will Initialize terraform and create lock files
+2. Terraform Plan - Which will act as a dry run to show what infrastructure will be created on your target cloud before the actual infrastructure is created
+3. Terraform apply - Which will apply the configuration that you have written in the terraform files.
+4. Terraform destroy - Which will delete the configuration that you have created on the cloud
+
+
