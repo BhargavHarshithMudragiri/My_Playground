@@ -1,0 +1,47 @@
+1. Terraform migration ( using import and then running terraform import command which will create a state file).
+
+- This will import the EC2 instance all details which was created manually.
+
+- Importing EC2 instance to create a state file.
+
+Steps:
+
+main.tf
+
+provider "aws" {
+  region = "us-east-1"
+}
+
+import {
+ id = "<aws_instance_id>"
+
+ to = aws_instance.<instance_name>
+}
+
+terraform init
+
+terraform plan -generate-config-out=generated_resources.tf
+
+Open generated_resources.tf and copy the content of the imported AWS Instance Details
+Paste the content back in main.tf by removing import block. Remove ipv6 configuration from Instance properties as well.
+Delete the generated_resources.tf file.
+
+terraform import aws_instance.<instance_name> <aws_instance_id>
+
+This will create the state file for already existing aws instance running in AWS console. Which will now completely controlled by terraform.
+
+This is how we will migrate existing infrastructure from cloud provider to terraform
+
+
+
+2. Terraform drift detection ( if some one manually changed any settings for any resource, then detecting that change is called drift detection).
+
+   There are 2 ways to detect it.
+
+Scenario 2a: Use terraform refresh using a cron job. ( terraform refresh, refershes the recents changes which was done manually to the statefile and keeps it updated.
+
+Scenario 2b: 
+
+- A) Use audit/activity logs to see who made changes, if its changed by user and resources is managed by TF, then send an alert using lambda/azure functions and notify.
+
+- B) Apply strict IAM rules so that no one can login to console.
