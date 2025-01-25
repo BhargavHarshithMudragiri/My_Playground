@@ -77,6 +77,10 @@ vault auth enable approle
 
 This command tells Vault to enable the AppRole authentication method.
 
+```
+export VAULT_ADDR='http://0.0.0.0:8200'
+```
+
 2. **Create an AppRole**:
 
 We need to create policy first,
